@@ -1,0 +1,23 @@
+<!-- Nestedif -->
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="main"></p>
+
+<script>
+let age = 15;
+let country = "USA";
+let text = "You can Not drive!";
+
+if (country == "USA") {
+  if (age >= 16) {
+    text = "You can drive!";
+  }
+}
+
+document.getElementById("main").innerHTML = text;
+</script>
+
+</body>
+</html>
