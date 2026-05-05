@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Password Generator</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+.container {
+  background: white;
+  padding: 20px;
+  width: 350px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+input[type="number"] {
+  width: 60px;
+  padding: 5px;
+}
+
+.options {
+  text-align: left;
+  margin: 10px 0;
+}
+
+button {
+  padding: 10px;
+  margin-top: 10px;
+  width: 100%;
+  border: none;
+  background: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+#result {
+  margin-top: 10px;
+  padding: 10px;
+  background: #eee;
+  word-break: break-all;
+  border-radius: 5px;
+}
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Password Generator</h2>
+
+<label>Password Length:</label> <input type="number" id="length" value="8" min="4" max="20">
+
+  <div class="options">
+    <label><input type="checkbox" id="numbers"> Include Numbers</label><br>
+    <label><input type="checkbox" id="symbols"> Include Symbols</label>
+  </div>
+
+<button onclick="generatePassword()">Generate</button>
+
+  <div id="result"></div>
+
+<button onclick="copyPassword()">Copy</button>
+
+</div>
+
+<script>
+function generatePassword() {
+  let length = document.getElementById("length").value;
+  let includeNumbers = document.getElementById("numbers").checked;
+  let includeSymbols = document.getElementById("symbols").checked;
+
+  let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+  if (includeNumbers) {
+    chars += "0123456789";
+  }
+
+  if (includeSymbols) {
+    chars += "!@#$%^&*()_+";
+  }
+
+  let password = "";
+
+  for (let i = 0; i < length; i++) {
+    let randomIndex = Math.floor(Math.random() * chars.length);
+    password += chars[randomIndex];
+  }
+
+  document.getElementById("result").textContent = password;
+}
+
+// clipboard
+function copyPassword() {
+  let text = document.getElementById("result").textContent;
+
+  if (!text) {
+    alert("Generate password first!");
+    return;
+  }
+
+  navigator.clipboard.writeText(text);
+  alert("Password copied!");
+}
+</script>
+
+</body>
+</html>

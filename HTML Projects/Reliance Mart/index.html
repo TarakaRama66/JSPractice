@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart Bazar</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    h1 { text-align: center; }
+
+.products, .cart {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  width: 200px;
+  border-radius: 10px;
+}
+
+button {
+  margin: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.cart-item {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.total {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+  </style>
+</head>
+<body>
+
+<h1>Reliance</h1>
+
+<h2>Products</h2>
+<div class="products" id="products"></div>
+
+<h2>Cart</h2>
+<div id="cart"></div>
+
+<p class="total">Total: ₹<span id="total">0</span></p>
+
+<script>
+const products = [
+  { id: 1, name: "Shirt", price: 500 },
+  { id: 2, name: "Shoes", price: 1000 },
+  { id: 3, name: "Watch", price: 1500 }
+];
+
+let cart = [];
+
+// Products display
+function showProducts() {
+  const container = document.getElementById("products");
+  products.forEach(p => {
+    let div = document.createElement("div");
+    div.className = "card";
+
+    div.innerHTML = `
+      <h3>${p.name}</h3>
+      <p>₹${p.price}</p>
+      <button onclick="addToCart(${p.id})">Add to Cart</button>
+    `;
+
+    container.appendChild(div);
+  });
+}
+
+// Add to Cart
+function addToCart(id) {
+  let item = cart.find(p => p.id === id);
+
+  if (item) {
+    item.qty++;
+  } else {
+    let product = products.find(p => p.id === id);
+    cart.push({ ...product, qty: 1 });
+  }
+
+  renderCart();
+}
+
+// Cart
+function renderCart() {
+  const cartDiv = document.getElementById("cart");
+  cartDiv.innerHTML = "";
+
+  let total = 0;
+
+  cart.forEach(item => {
+    total += item.price * item.qty;
+
+    let div = document.createElement("div");
+    div.className = "cart-item";
+
+    div.innerHTML = `
+      <strong>${item.name}</strong> - ₹${item.price} × ${item.qty}
+      <br>
+      <button onclick="changeQty(${item.id}, 1)">+</button>
+      <button onclick="changeQty(${item.id}, -1)">-</button>
+      <button onclick="removeItem(${item.id})">Remove</button>
+    `;
+
+    cartDiv.appendChild(div);
+  });
+
+  document.getElementById("total").textContent = total;
+}
+
+// Quantity
+function changeQty(id, delta) {
+  let item = cart.find(p => p.id === id);
+  item.qty += delta;
+
+  if (item.qty <= 0) {
+    cart = cart.filter(p => p.id !== id);
+  }
+
+  renderCart();
+}
+
+// Remove Items
+function removeItem(id) {
+  cart = cart.filter(p => p.id !== id);
+  renderCart();
+}
+
+showProducts();
+</script>
+
+</body>
+</html>

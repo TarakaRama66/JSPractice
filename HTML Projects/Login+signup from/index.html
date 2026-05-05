@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Login & Signup</title>
+  <style>
+    body { font-family: Arial; display:flex; justify-content:center; align-items:center; height:100vh; background:#f2f2f2; }
+    .box { background:#fff; padding:20px; width:300px; border-radius:10px; }
+    input, button { width:100%; padding:8px; margin:5px 0; }
+    .error { color:red; font-size:12px; }
+    .link { color:blue; cursor:pointer; text-align:center; }
+  </style>
+</head>
+<body>
+
+<div class="box">
+
+  <!-- LOGIN -->
+
+  <div id="login">
+    <h3>Login</h3>
+    <input id="lEmail" placeholder="Email">
+    <input id="lPass" type="password" placeholder="Password">
+    <label><input type="checkbox" onclick="toggle('lPass')"> Show</label>
+    <p id="lErr" class="error"></p>
+    <button onclick="login()">Login</button>
+    <p class="link" onclick="show('signup')">Create Account</p>
+  </div>
+
+  <!-- SIGNUP -->
+
+  <div id="signup" style="display:none;">
+    <h3>Signup</h3>
+    <input id="sName" placeholder="Name">
+    <input id="sEmail" placeholder="Email">
+    <input id="sPass" type="password" placeholder="Password">
+    <label><input type="checkbox" onclick="toggle('sPass')"> Show</label>
+    <p id="sErr" class="error"></p>
+    <button onclick="signup()">Signup</button>
+    <p class="link" onclick="show('login')">Back to Login</p>
+  </div>
+
+</div>
+
+<script>
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+// forms
+function show(id){
+  login.style.display = id==="login"?"block":"none";
+  signup.style.display = id==="signup"?"block":"none";
+}
+
+// password
+function toggle(id){
+  let el = document.getElementById(id);
+  el.type = el.type === "password" ? "text" : "password";
+}
+
+// signup
+function signup(){
+  let name = sName.value, email = sEmail.value, pass = sPass.value;
+
+  if(!name || !email || pass.length < 6){
+    sErr.textContent = "Fill all fields (min 6 char password)";
+    return;
+  }
+
+  users.push({name,email,pass});
+  localStorage.setItem("users", JSON.stringify(users));
+
+  alert("Signup Success");
+  show("login");
+}
+
+// login
+function login(){
+  let user = users.find(u => u.email===lEmail.value && u.pass===lPass.value);
+
+  if(!user){
+    lErr.textContent = "Invalid login";
+    return;
+  }
+
+  alert("Welcome " + user.name);
+}
+</script>
+
+</body>
+</html>
