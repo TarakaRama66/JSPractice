@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h3>Menu</h3>
+    <button onclick="showHome()">Home</button>
+    <button onclick="showProfile()">Profile</button>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <div class="content">
+    <h2 id="welcome"></h2>
+
+    <div id="homeSection">
+      <h3>Home</h3>
+      <p>Welcome to your dashboard!
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut, iste adipisci provident vero aliquam exercitationem soluta illum unde? Inventore itaque molestiae nulla optio nisi tempore! Quisquam qui delectus voluptate reiciendis.
+      </p>
+    </div>
+
+    <div id="profileSection" style="display:none;">
+      <h3>Profile</h3>
+      <p id="userInfo"></p>
+    </div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
