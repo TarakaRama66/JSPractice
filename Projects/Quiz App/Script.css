@@ -1,0 +1,39 @@
+body{
+font-family: Arial;
+background:#f2f2f2;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.quiz-box{
+background:#fff;
+padding:20px;
+width:400px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+h2{
+margin-bottom:15px;
+}
+
+button{
+width:100%;
+padding:10px;
+margin:5px 0;
+cursor:pointer;
+border:none;
+background:#4CAF50;
+color:white;
+border-radius:5px;
+}
+
+button:hover
+
+#timer{
+text-align:right;
+color:red;
+font-weight:bold;
+}
