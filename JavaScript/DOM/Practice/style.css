@@ -1,0 +1,28 @@
+body{
+    font-family: Arial;
+    padding: 20px;
+}
+
+button{
+    padding: 10px 20px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+input{
+    padding: 10px;
+    width: 250px;
+    margin-top: 10px;
+}
+
+.scroll-box{
+    height: 200px;
+    width: 300px;
+    overflow: auto;
+    border: 2px solid black;
+    margin-top: 20px;
+}
+
+.content{
+    height: 1000px;
+}
